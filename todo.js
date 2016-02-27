@@ -1,17 +1,31 @@
+var fs = require.safe('fs-extra')
+
 var file;
 var Users;
 
 // Load json file
 // TODO backup json in exports.unload()
 exports.load = function () {
-    try {
+
+    var file = require.safe('./../common/todoList.json');
+    fs.ensureFile(file, function (err) {
+        console.log(err) // => null 
+        // file has now been created, including the directory it is to be placed in 
+    });
+
+    if (file.users == null) {
+        file.users = [];
+    }
+    Users = file.users;
+
+/*    try {
         file = require.safe('./../common/todoList.json');
         
         // If file is empty for some weird reason
         // Init JSON
         // TODO Init without a useless boilerplate
             
-        /* file.users = [
+        file.users = [
             {
                 "id": 0,
                 "name": "Kassy",
@@ -19,7 +33,7 @@ exports.load = function () {
                     { "item": "Hello World" }
                 ]
             }
-        ] */
+        ]
         // Continue as usual, load users
         Users = file.users;
     }
@@ -27,11 +41,12 @@ exports.load = function () {
         if (e.code === "ENOENT") {
             // Error NO ENTry
             // File not found thrown, create a new file
+            var fileOut = new File({ "users": [] }, "./../common/todoList.json");
         } else {
             file = null;
             throw e;
         }
-    }
+    } */
 }
 
 exports.match = function (text, commandPrefix) {
@@ -97,9 +112,9 @@ function AddTodoItem(userName, userId, text) {
                     { "item": text }
                 ]
             });
-            return "(Y) Created a new todo list for you. ";
+        return "(Y) Created a new todo list for you. ";
     }
-    
+
     UpdateTodoJson();
 }
 
@@ -119,9 +134,9 @@ function RemoveTodoItem(userName, userId, itemId) {
         }
     } else {
         // User does not exist, create a new one
-            return "Ain't got no todo-s for ya mate ._. You must be new here! ";
+        return "Ain't got no todo-s for ya mate ._. You must be new here! ";
     }
-    
+
     UpdateTodoJson();
 }
 
@@ -150,6 +165,6 @@ function SearchUserById(userId) {
     return null;
 }
 
-function UpdateTodoJson(){
+function UpdateTodoJson() {
     file = Users;
 }
