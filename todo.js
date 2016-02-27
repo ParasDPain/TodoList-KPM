@@ -1,31 +1,16 @@
-var fs = require.safe('fs-extra');
-
 var file;
 var Users;
 
 // Load json file
 // TODO backup json in exports.unload()
 exports.load = function () {
-
-    var file = require.safe('../common/todoList.json');
-    fs.ensureFile(file, function (err) {
-        console.log(err) // => null 
-        // file has now been created, including the directory it is to be placed in 
-    });
-
-    if (file.users == null) {
-        file.users = [];
-    }
-    Users = file.users;
-
-/*    try {
+try {
         file = require.safe('./../common/todoList.json');
         
         // If file is empty for some weird reason
-        // Init JSON
-        // TODO Init without a useless boilerplate
+        // JSON sample
             
-        file.users = [
+        /* file.users = [
             {
                 "id": 0,
                 "name": "Kassy",
@@ -33,7 +18,7 @@ exports.load = function () {
                     { "item": "Hello World" }
                 ]
             }
-        ]
+        ] */
         // Continue as usual, load users
         Users = file.users;
     }
@@ -41,12 +26,12 @@ exports.load = function () {
         if (e.code === "ENOENT") {
             // Error NO ENTry
             // File not found thrown, create a new file
-            var fileOut = new File({ "users": [] }, "./../common/todoList.json");
+            file = new File({ "users": [] }, "./../common/todoList.json");
         } else {
             file = null;
             throw e;
         }
-    } */
+    }
 }
 
 exports.match = function (text, commandPrefix) {
