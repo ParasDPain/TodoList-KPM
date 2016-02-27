@@ -1,4 +1,4 @@
-var fs = require.safe('fs-extra')
+var fs = require.safe('fs-extra');
 
 var file;
 var Users;
