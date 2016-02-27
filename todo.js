@@ -7,7 +7,7 @@ var Users;
 // TODO backup json in exports.unload()
 exports.load = function () {
 
-    var file = require.safe('./../common/todoList.json');
+    var file = require.safe('../common/todoList.json');
     fs.ensureFile(file, function (err) {
         console.log(err) // => null 
         // file has now been created, including the directory it is to be placed in 
