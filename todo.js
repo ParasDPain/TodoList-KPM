@@ -47,8 +47,11 @@ exports.help = function () {
 };
 
 exports.run = function (api, event) {
+    // Notify users that the project is incomplete 
+    api.sendMessage("Please stay on the line, your feedback is important to us. Tehehe >_> <_< [The module is WIP at the moment. Contributions are welcome ^^]", event.thread_id);
+        
     // Scan for the JSON file
-    var command = event.body;
+    /* var command = event.body;
     var commandPrefix = api.commandPrefix;
     var query;
 
@@ -71,7 +74,7 @@ exports.run = function (api, event) {
     } else {
         // JSON file couldn't be loaded for unknown reasons
         api.sendMessage("SOMEONE STOLE ALL YOUR SECRETS! RUN AND HIDE!!!!!", event.thread_id);
-    }
+    } */
 };
 
 function AddTodoItem(userName, userId, text) {
